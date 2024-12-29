@@ -128,6 +128,7 @@ const navListMenuItems = [
 // }
 
 function NavList() {
+    const { user } = useContext(AuthContext);
     return (
         <List className="mt-4 mb-6 p-0 lg:mt-0 items-center lg:mb-0 lg:flex-row lg:p-1">
             <Typography
@@ -141,6 +142,17 @@ function NavList() {
                 <NavLink to="/" className={({ isActive }) => isActive ? 'flex text-orange-700 hover:font-semibold items-center gap-2 py-2 pr-4' : 'flex items-center gap-2 py-2 pr-4'}>Home</NavLink>
             </Typography>
             {/* <NavListMenu /> */}
+            {
+                user?.email && <Typography
+                as="a"
+                href="#"
+                variant="small"
+                color="blue-gray"
+                className="font-medium"
+            >
+                <NavLink to="/" className={({ isActive }) => isActive ? 'flex text-orange-700 hover:font-semibold items-center gap-2 py-2 pr-4' : 'flex items-center gap-2 py-2 pr-4'}>Add Blog</NavLink>
+            </Typography>
+            }
             <Typography
                 as="a"
                 href="#"
@@ -148,9 +160,7 @@ function NavList() {
                 color="blue-gray"
                 className="font-medium"
             >
-                <ListItem className="flex items-center gap-2 py-2 pr-4">
-                    Contact Us
-                </ListItem>
+                <NavLink to="/" className={({ isActive }) => isActive ? 'flex text-orange-700 hover:font-semibold items-center gap-2 py-2 pr-4' : 'flex items-center gap-2 py-2 pr-4'}>All Blogs</NavLink>
             </Typography>
             <Typography
                 as="a"
@@ -159,9 +169,16 @@ function NavList() {
                 color="blue-gray"
                 className="font-medium"
             >
-                <ListItem className="flex items-center gap-2 py-2 pr-4">
-                    Ok then
-                </ListItem>
+                <NavLink to="/" className={({ isActive }) => isActive ? 'flex text-orange-700 hover:font-semibold items-center gap-2 py-2 pr-4' : 'flex items-center gap-2 py-2 pr-4'}>Featured Blogs</NavLink>
+            </Typography>
+            <Typography
+                as="a"
+                href="#"
+                variant="small"
+                color="blue-gray"
+                className="font-medium"
+            >
+                <NavLink to="/" className={({ isActive }) => isActive ? 'flex text-orange-700 hover:font-semibold items-center gap-2 py-2 pr-4' : 'flex items-center gap-2 py-2 pr-4'}>WishList</NavLink>
             </Typography>
         </List>
     );

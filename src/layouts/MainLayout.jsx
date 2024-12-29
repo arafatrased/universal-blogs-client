@@ -1,6 +1,7 @@
 import { Outlet } from "react-router-dom";
-import Home from "../pages/Home/Home";
 import { NavbarWithMegaMenu } from "../shared/Navbar";
+import toast, { Toaster } from 'react-hot-toast';
+import { Footer } from "../shared/Footer";
 
 
 const MainLayout = () => {
@@ -8,7 +9,11 @@ const MainLayout = () => {
        <div>
         <NavbarWithMegaMenu></NavbarWithMegaMenu>
         <Outlet></Outlet>
-        
+
+
+        <Toaster />
+        <hr />
+        <Footer></Footer>
        </div>
     )
 };

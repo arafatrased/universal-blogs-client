@@ -1,16 +1,16 @@
 import React, { useContext } from 'react';
+import toast, { Toaster } from 'react-hot-toast';
 import {
-    Card,
     Input,
-    Checkbox,
     Button,
     Typography,
-  } from "@material-tailwind/react";
-import { Link } from 'react-router-dom';
+} from "@material-tailwind/react";
+import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../provider/AuthProvider';
 
 const Login = () => {
     const { loginUser } = useContext(AuthContext);
+    const navigate = useNavigate();
     const handleLogin = (e) => {
         e.preventDefault();
         const form = e.target;
@@ -18,17 +18,19 @@ const Login = () => {
         const password = form.password.value;
 
         loginUser(email, password)
-        .then(result => {
-            const user = result.user;
-            console.log(user);
-        })
-        .catch(error => {
-            console.log(error);
-        })
+            .then(result => {
+                const user = result.user;
+                toast.success(`Login Successfull`);
+                navigate('/');
+                console.log(user);
+            })
+            .catch(error => {
+                console.log(error);
+            })
     }
 
     return (
-        <div className='w-10/12 mx-auto flex flex-col items-center justify-center mt-8'>
+        <div className='w-10/12 mx-auto mb-10 flex flex-col items-center justify-center mt-8'>
             <Typography variant="h4" color="blue-gray">
                 Log In
             </Typography>
@@ -37,7 +39,7 @@ const Login = () => {
             </Typography>
             <form onSubmit={handleLogin} className="mt-8 mb-2 w-80 max-w-screen-lg sm:w-96">
                 <div className="mb-1 flex flex-col gap-6">
-                    
+
                     <Typography variant="h6" color="blue-gray" className="-mb-3">
                         Your Email
                     </Typography>
@@ -69,14 +71,15 @@ const Login = () => {
                 <Button type='submit' className="mt-6" fullWidth>
                     Log In
                 </Button>
-                
+
             </form>
             <Typography color="gray" className="mt-4 text-center font-normal">
-                    Don't have an account?{" "}
-                    <Link  to="/register" className="font-medium text-gray-900">
-                       Register
-                    </Link>
+                Don't have an account?{" "}
+                <Link to="/register" className="font-medium text-gray-900">
+                    Register
+                </Link>
             </Typography>
+            <Toaster />
 
         </div>
     );

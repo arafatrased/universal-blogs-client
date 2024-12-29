@@ -1,0 +1,36 @@
+import { Carousel } from "@material-tailwind/react";
+
+export function Banner() {
+  return (
+    <div className="w-full h-[60vh] overflow-hidden">
+      <Carousel className="">
+        <div className="relative">
+          <img
+            src="https://images.unsplash.com/photo-1497436072909-60f360e1d4b1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2560&q=80"
+            alt="image 1"
+            className="w-full object-cover blur-sm"
+          />
+          <div>
+            <h1 className="absolute top-1/3 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white text-4xl font-bold">
+              Welcome to Universal Blog
+            </h1>
+          </div>
+        </div>
+        <div>
+          <img
+            src="https://images.unsplash.com/photo-1493246507139-91e8fad9978e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2940&q=80"
+            alt="image 2"
+            className=" w-full object-cover"
+          />
+        </div>
+        <div>
+          <img
+            src="https://images.unsplash.com/photo-1518623489648-a173ef7824f3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2762&q=80"
+            alt="image 3"
+            className=" w-full object-cover"
+          />
+        </div>
+      </Carousel>
+    </div>
+  );
+}
