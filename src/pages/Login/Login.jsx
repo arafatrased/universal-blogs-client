@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import toast, { Toaster } from 'react-hot-toast';
+import { FcGoogle } from "react-icons/fc";
 import {
     Input,
     Button,
@@ -9,7 +10,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../provider/AuthProvider';
 
 const Login = () => {
-    const { loginUser } = useContext(AuthContext);
+    const { loginUser, logInWithGoogle } = useContext(AuthContext);
     const navigate = useNavigate();
     const handleLogin = (e) => {
         e.preventDefault();
@@ -29,6 +30,20 @@ const Login = () => {
             })
     }
 
+    const hangleGoogleLogin = () => {
+        logInWithGoogle()
+            .then(result => {
+                const user = result.user;
+                toast.success(`Login Successfull`);
+                navigate('/');
+                console.log(user);
+            })
+            .catch(error =>{
+                console.log(error);
+            })
+            
+    }
+
     return (
         <div className='w-10/12 mx-auto mb-10 flex flex-col items-center justify-center mt-8'>
             <Typography variant="h4" color="blue-gray">
@@ -37,9 +52,16 @@ const Login = () => {
             <Typography color="gray" className="mt-1 font-normal">
                 Log In to authenticate your account.
             </Typography>
-            <form onSubmit={handleLogin} className="mt-8 mb-2 w-80 max-w-screen-lg sm:w-96">
-                <div className="mb-1 flex flex-col gap-6">
+            <div className="mt-2 mb-2 w-80 max-w-screen-lg sm:w-96">
+                <hr className="mb-3" />
+                <Button onClick={hangleGoogleLogin} type='submit' variant="outlined" className='flex items-center justify-center gap-2 bg-white text-black' fullWidth>
+                    <FcGoogle /> Google Log In
+                </Button>
+                <hr className="mt-3" />
+            </div>
 
+            <form onSubmit={handleLogin} className="mt-2 mb-2 w-80 max-w-screen-lg sm:w-96">
+                <div className="mb-1 flex flex-col gap-6">
                     <Typography variant="h6" color="blue-gray" className="-mb-3">
                         Your Email
                     </Typography>

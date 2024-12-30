@@ -30,6 +30,7 @@ import {
 } from "@heroicons/react/24/solid";
 import { Link, NavLink } from "react-router-dom";
 import { AuthContext } from "../provider/AuthProvider";
+import userIcon from '../assets/user.png';
 
 const navListMenuItems = [
     {
@@ -150,7 +151,7 @@ function NavList() {
                 color="blue-gray"
                 className="font-medium"
             >
-                <NavLink to="/" className={({ isActive }) => isActive ? 'flex text-orange-700 hover:font-semibold items-center gap-2 py-2 pr-4' : 'flex items-center gap-2 py-2 pr-4'}>Add Blog</NavLink>
+                <NavLink to="/addblog" className={({ isActive }) => isActive ? 'flex text-orange-700 hover:font-semibold items-center gap-2 py-2 pr-4' : 'flex items-center gap-2 py-2 pr-4'}>Add Blog</NavLink>
             </Typography>
             }
             <Typography
@@ -213,7 +214,10 @@ export function NavbarWithMegaMenu() {
                     <div className="hidden gap-2 lg:flex">
                         {
                             user ? <div className="hidden gap-2 lg:flex items-center">
-                                <h1 className="text-sm">{user?.email}</h1>
+                                {
+                                    user?.photoURL ? <img src={user?.photoURL} alt={userIcon} className="h-10 w-10 rounded-full" /> : <UserGroupIcon className="h-10 w-10 rounded-full" />
+                                }
+                                {/* <h1 className="text-sm">{user?.email}</h1> */}
                                 <div>
                                     <Button className="hover:bg-gray-300" variant="outlined" size="sm" >
                                         <NavLink onClick={logOut} className={({ isActive }) => isActive ? 'flex text-orange-700 hover:font-semibold items-center gap-2' : 'flex items-center gap-2'}>Log Out</NavLink>

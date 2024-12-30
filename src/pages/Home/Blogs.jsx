@@ -1,24 +1,36 @@
 import React from 'react';
 
 const Blogs = () => {
+    const [blogs, setBlogs] = React.useState([]);
+
+    React.useEffect(() => {
+        fetch('http://localhost:5000/blogs')
+            .then((response) => response.json())
+            .then((data) => {
+                console.log('Blogs:', data);
+                setBlogs(data);
+            })
+    }, []);
     return (
         <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4'>
-            <div className='bg-gray-200 p-4'>
-                <h2>Blog 1</h2>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi, quae.</p>
-            </div>
-            <div className='bg-gray-200 p-4'>
-                <h2>Blog 2</h2>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi, quae.</p>
-            </div>
-            <div className='bg-gray-200 p-4'>
-                <h2>Blog 3</h2>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi, quae.</p>
-            </div>
-            <div className='bg-gray-200 p-4'>
-                <h2>Blog 4</h2>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi, quae.</p>
-            </div>
+            {blogs.map((blog) => (
+                <div key={blog._id} className='border p-4 rounded-lg shadow-md'>
+                    <img src={blog.imageUrl} alt={blog.title} className='w-full h-48 object-cover rounded-md' />
+                    <h2 className='text-xl font-bold my-2'>{blog.title}</h2>
+                    <div className='my-2'>
+                        <span className='text-sm mr-2 text-gray-500 ml-2'>Author: {blog?.author || 'N/A'}</span>
+                        <span className='text-sm text-gray-800 rounded-md p-1 bg-orange-100'>{blog.category}</span>
+                    </div>
+                    <p className='text-gray-500'>{blog.shortDescription}...</p>
+                    <div className='flex justify-between items-center mt-4'>
+                        <button className='bg-orange-500 text-white px-4 py-1 rounded-md mt-2'>Details</button>
+                        <button className="text-red-500 hover:text-red-600 transition-colors text-xl">
+                            ❤️
+                        </button>
+
+                    </div>
+                </div>
+            ))}
         </div>
     );
 };

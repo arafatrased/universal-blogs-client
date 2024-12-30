@@ -5,6 +5,7 @@ import MainLayout from "../layouts/MainLayout";
 import Home from "../pages/Home/Home";
 import Login from "../pages/Login/Login";
 import Register from "../pages/Register/Register";
+import BlogForm from "../pages/BlogForm/BlogForm";
 
 
 
@@ -26,6 +27,10 @@ import Register from "../pages/Register/Register";
         {
           path: "register",
           element: <Register></Register>
+        },
+        {
+          path: "addblog",
+          element: <BlogForm></BlogForm>
         }
       ]
     },
