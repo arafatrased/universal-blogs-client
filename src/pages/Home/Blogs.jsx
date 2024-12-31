@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const Blogs = () => {
     const [blogs, setBlogs] = React.useState([]);
@@ -7,7 +8,6 @@ const Blogs = () => {
         fetch('http://localhost:5000/blogs')
             .then((response) => response.json())
             .then((data) => {
-                console.log('Blogs:', data);
                 setBlogs(data);
             })
     }, []);
@@ -23,10 +23,10 @@ const Blogs = () => {
                     </div>
                     <p className='text-gray-500'>{blog.shortDescription}...</p>
                     <div className='flex justify-between items-center mt-4'>
-                        <button className='bg-orange-500 text-white px-4 py-1 rounded-md mt-2'>Details</button>
-                        <button className="text-red-500 hover:text-red-600 transition-colors text-xl">
+                        <Link to={`/details/${blog._id}`} className='bg-orange-500 text-white px-4 py-1 rounded-md mt-2'>Details</Link>
+                        <Link   className="text-red-500 hover:text-red-600 transition-colors text-xl">
                             ❤️
-                        </button>
+                        </Link>
 
                     </div>
                 </div>

@@ -1,22 +1,27 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import useAuth from '../../hooks/useAuth';
+import { useLoaderData, useNavigate } from 'react-router-dom';
+import toast from 'react-hot-toast';
 
-const BlogForm = () => {
+const UpdateBlog = () => {
     const { user } = useAuth();
+    const blog = useLoaderData();
+    const navigate = useNavigate();
+
     const [blogData, setBlogData] = useState({
-        title: '',
-        imageUrl: '',
-        category: '',
-        shortDescription: '',
-        longDescription: '',
+        title: blog.title,
+        imageUrl: blog.imageUrl,
+        category: blog.category,
+        shortDescription: blog.shortDescription,
+        longDescription: blog.longDescription,
     });
 
     const categories = ['Technology', 'Health', 'Education', 'Travel', 'Lifestyle'];
 
     const handleChange = (e) => {
         const { name, value } = e.target;
-        setBlogData({ ...blogData, [name]: value });
+        setBlogData({ ...blogData, [name]: value});
     };
 
     const handleSubmit = (e) => {
@@ -24,11 +29,13 @@ const BlogForm = () => {
         blogData.email = user.email;
         blogData.author = user.displayName || '';
         console.log('Form Data:', blogData);
-        console.log('User:', user);
         // Add your submit logic here (e.g., send data to backend)
-        axios.post('http://localhost:5000/blogs', blogData)
+        axios.put(`http://localhost:5000/updateblog/${blog._id}`, blogData)
             .then((response) => {
-                console.log('Blog Created:', response.data);
+                if(response.data.modifiedCount === 1) {
+                    toast.success('Blog Updated Successfully!');
+                }
+                navigate(`/details/${blog._id}`);
             })
     };
 
@@ -111,19 +118,19 @@ const BlogForm = () => {
                         value={user.email}
                         onChange={handleChange}
                         className="w-full px-3 py-2 border rounded-md"
-                        disabled />
+                        disabled
+                    />
                 </div>
-
                 {/* Submit Button */}
                 <button
                     type="submit"
                     className="w-full bg-orange-500 text-white py-2 rounded-md hover:bg-orange-700"
                 >
-                    Add Blog
+                   Update Blog
                 </button>
             </form>
         </div>
     );
 };
 
-export default BlogForm;
+export default UpdateBlog;

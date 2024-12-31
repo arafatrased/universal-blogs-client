@@ -6,12 +6,13 @@ import {
     Button,
     Typography,
 } from "@material-tailwind/react";
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../provider/AuthProvider';
 
 const Login = () => {
     const { loginUser, logInWithGoogle } = useContext(AuthContext);
     const navigate = useNavigate();
+    const location = useLocation();
     const handleLogin = (e) => {
         e.preventDefault();
         const form = e.target;
@@ -35,7 +36,7 @@ const Login = () => {
             .then(result => {
                 const user = result.user;
                 toast.success(`Login Successfull`);
-                navigate('/');
+                navigate(location?.state || '/');
                 console.log(user);
             })
             .catch(error =>{

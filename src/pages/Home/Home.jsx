@@ -1,5 +1,4 @@
 import React from 'react';
-import BlogCard from './BlogCard';
 import { Banner } from '../../components/Banner';
 import Blogs from './Blogs';
 import Newslater from './Newslater';
@@ -15,7 +14,7 @@ const Home = () => {
                 <div className='col-span-1 md:col-span-3'>
                     <Newslater></Newslater>
                     <div>
-                        <h2>Recently Posted thaslfdla sdflsakdjf </h2>
+                        <h2>Recent</h2>
                     </div>
                 </div>
             </div>

@@ -6,6 +6,12 @@ import Home from "../pages/Home/Home";
 import Login from "../pages/Login/Login";
 import Register from "../pages/Register/Register";
 import BlogForm from "../pages/BlogForm/BlogForm";
+import BlogDetails from "../pages/Details/BlogDetails";
+import UpdateBlog from "../pages/BlogForm/UpdateBlog";
+import PrivateRoute from "./PrivateRoute";
+import AllBlogs from "../pages/AllBlogs/AllBlogs";
+import Table from "../components/Table";
+
 
 
 
@@ -30,7 +36,25 @@ import BlogForm from "../pages/BlogForm/BlogForm";
         },
         {
           path: "addblog",
-          element: <BlogForm></BlogForm>
+          element: <PrivateRoute><BlogForm></BlogForm></PrivateRoute>
+        },
+        {
+          path: 'details/:id',
+          element: <PrivateRoute><BlogDetails></BlogDetails></PrivateRoute>,
+          loader: ({params}) => fetch(`http://localhost:5000/blogs/${params.id}`)
+        },
+        {
+          path: 'update/:id',
+          element: <PrivateRoute><UpdateBlog></UpdateBlog></PrivateRoute>,
+          loader: ({params}) => fetch(`http://localhost:5000/blogs/${params.id}`)
+        },
+        {
+          path: 'allblogs',
+          element: <AllBlogs></AllBlogs>,
+        },
+        {
+          path: "wishlist",
+          element: <Table></Table>
         }
       ]
     },
