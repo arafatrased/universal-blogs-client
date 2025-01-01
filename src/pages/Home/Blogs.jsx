@@ -3,6 +3,10 @@ import { Link } from 'react-router-dom';
 
 const Blogs = () => {
     const [blogs, setBlogs] = React.useState([]);
+    
+    const handleWishList = () => {
+        console.log('Added to wishlist');
+    }
 
     React.useEffect(() => {
         fetch('http://localhost:5000/blogs')
@@ -12,7 +16,7 @@ const Blogs = () => {
             })
     }, []);
     return (
-        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4'>
+        <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
             {blogs.map((blog) => (
                 <div key={blog._id} className='border p-4 rounded-lg shadow-md'>
                     <img src={blog.imageUrl} alt={blog.title} className='w-full h-48 object-cover rounded-md' />
@@ -24,9 +28,9 @@ const Blogs = () => {
                     <p className='text-gray-500'>{blog.shortDescription}...</p>
                     <div className='flex justify-between items-center mt-4'>
                         <Link to={`/details/${blog._id}`} className='bg-orange-500 text-white px-4 py-1 rounded-md mt-2'>Details</Link>
-                        <Link   className="text-red-500 hover:text-red-600 transition-colors text-xl">
+                        <button onClick={handleWishList} className="text-red-500 hover:text-red-600 transition-colors text-xl">
                             ❤️
-                        </Link>
+                        </button>
 
                     </div>
                 </div>

@@ -2,6 +2,7 @@ import React from 'react';
 import { Banner } from '../../components/Banner';
 import Blogs from './Blogs';
 import Newslater from './Newslater';
+import RecentPosts from '../../components/RecentPosts';
 
 const Home = () => {
     return (
@@ -13,9 +14,7 @@ const Home = () => {
                 </div>
                 <div className='col-span-1 md:col-span-3'>
                     <Newslater></Newslater>
-                    <div>
-                        <h2>Recent</h2>
-                    </div>
+                    <RecentPosts></RecentPosts>
                 </div>
             </div>
         </div>

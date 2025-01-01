@@ -1,7 +1,6 @@
 import { Button } from '@material-tailwind/react';
 import axios from 'axios';
 import React, { useEffect } from 'react';
-import { use } from 'react';
 import { Link } from 'react-router-dom';
 
 const AllBlogs = () => {
@@ -19,10 +18,8 @@ const AllBlogs = () => {
     }, [])
     const handleSearch = () => {
         const searchValue = searchRef.current.value;
-        console.log(searchValue)
         axios.get(`http://localhost:5000/allblogs?search=${searchValue}`)
             .then(res => {
-                console.log(res.data)
                 setAllBlogs(res.data)
             })
             .catch(err => {

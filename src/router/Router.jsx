@@ -11,6 +11,8 @@ import UpdateBlog from "../pages/BlogForm/UpdateBlog";
 import PrivateRoute from "./PrivateRoute";
 import AllBlogs from "../pages/AllBlogs/AllBlogs";
 import Table from "../components/Table";
+import FeaturedPost from "../pages/FeaturedPost/FeaturedPost";
+import WishList from "../pages/WishList/WishList";
 
 
 
@@ -54,7 +56,12 @@ import Table from "../components/Table";
         },
         {
           path: "wishlist",
-          element: <Table></Table>
+          element: <WishList></WishList>,
+        },
+        {
+          path: "featured",
+          element: <FeaturedPost></FeaturedPost>,
+          loader: () => fetch('http://localhost:5000/allblogs')
         }
       ]
     },

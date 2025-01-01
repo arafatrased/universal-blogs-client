@@ -170,7 +170,7 @@ function NavList() {
                 color="blue-gray"
                 className="font-medium"
             >
-                <NavLink to="/" className={({ isActive }) => isActive ? 'flex text-orange-700 hover:font-semibold items-center gap-2 py-2 pr-4' : 'flex items-center gap-2 py-2 pr-4'}>Featured Blogs</NavLink>
+                <NavLink to="/featured" className={({ isActive }) => isActive ? 'flex text-orange-700 hover:font-semibold items-center gap-2 py-2 pr-4' : 'flex items-center gap-2 py-2 pr-4'}>Featured Blogs</NavLink>
             </Typography>
             <Typography
                 as="a"
