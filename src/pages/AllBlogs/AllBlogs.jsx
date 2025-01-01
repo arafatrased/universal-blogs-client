@@ -1,10 +1,12 @@
+import { Button } from '@material-tailwind/react';
 import axios from 'axios';
 import React, { useEffect } from 'react';
 import { use } from 'react';
 import { Link } from 'react-router-dom';
 
 const AllBlogs = () => {
-    const [allblogs, setAllBlogs] = React.useState([])
+    const [allblogs, setAllBlogs] = React.useState([]);
+    const searchRef = React.useRef(null);
 
     useEffect(() => {
         axios.get('http://localhost:5000/allblogs')
@@ -15,10 +17,32 @@ const AllBlogs = () => {
                 console.log(err)
             })
     }, [])
+    const handleSearch = () => {
+        const searchValue = searchRef.current.value;
+        console.log(searchValue)
+        axios.get(`http://localhost:5000/allblogs?search=${searchValue}`)
+            .then(res => {
+                console.log(res.data)
+                setAllBlogs(res.data)
+            })
+            .catch(err => {
+                console.log(err)
+            })
+    }
 
     return (
         <div className='w-11/12 mx-auto my-4'>
             <h2 className='text-center text-3xl font-bold mb-4'>All <span className='text-orange-800'>Blogs</span></h2>
+            <div className='w-8/12 mx-auto flex justify-between gap-2 my-4'>
+
+                <div className='w-full relative'>
+                    <input ref={searchRef} type='text' placeholder='write blog title to search' className='border border-[#e5eaf2] py-3 pr-4 pl-[120px] outline-none w-full rounded-md' />
+
+                    <span className='bg-gray-300 text-gray-500 text-[1rem] absolute top-0 left-0 h-full px-3 flex items-center justify-center rounded-l-md'>Search Here</span>
+                </div>
+                <Button onClick={handleSearch} variant='outlined'>Search</Button>
+
+            </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4">
                 {allblogs.map((blog) => (
                     <div key={blog._id} className='border p-4 rounded-lg shadow-md'>
