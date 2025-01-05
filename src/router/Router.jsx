@@ -56,7 +56,8 @@ import WishList from "../pages/WishList/WishList";
         },
         {
           path: "wishlist",
-          element: <WishList></WishList>,
+          element: <PrivateRoute><WishList></WishList></PrivateRoute>,
+          loader: () => fetch('http://localhost:5000/wishlist')
         },
         {
           path: "featured",

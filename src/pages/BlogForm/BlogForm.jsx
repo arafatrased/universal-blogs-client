@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import useAuth from '../../hooks/useAuth';
+import toast from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
 
 const BlogForm = () => {
     const { user } = useAuth();
+    const navigate = useNavigate()
     const [blogData, setBlogData] = useState({
         title: '',
         imageUrl: '',
@@ -28,7 +31,8 @@ const BlogForm = () => {
         // Add your submit logic here (e.g., send data to backend)
         axios.post('http://localhost:5000/blogs', blogData)
             .then((response) => {
-                console.log('Blog Created:', response.data);
+                toast.success('Blog Added Successfully')
+                navigate('/allblogs')
             })
     };
 

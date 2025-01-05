@@ -1,11 +1,29 @@
+import axios from 'axios';
 import React from 'react';
+import toast from 'react-hot-toast';
 import { Link } from 'react-router-dom';
 
 const Blogs = () => {
     const [blogs, setBlogs] = React.useState([]);
     
-    const handleWishList = () => {
-        console.log('Added to wishlist');
+    const handleWishList = (blog) => {
+        const { _id, title, imageUrl, author, category, shortDescription } = blog;
+        console.log(_id);
+        const wishedBlog = { wish_id: _id, title, imageUrl, author, category, shortDescription };
+        axios.post('http://localhost:5000/wishlist', wishedBlog)
+            .then((response) => {
+                console.log(response.data);
+                if (response.data.insertedId) {
+                    toast.success('Blog added to wishlist!');
+                }
+                else {
+                    toast.error('Failed to add to wishlist');
+                }
+            })
+            .catch((error) => {
+                console.error(error);
+                toast.error('Failed to add to wishlist');
+            });
     }
 
     React.useEffect(() => {
@@ -25,10 +43,10 @@ const Blogs = () => {
                         <span className='text-sm mr-2 text-gray-500 ml-2'>Author: {blog?.author || 'N/A'}</span>
                         <span className='text-sm text-gray-800 rounded-md p-1 bg-orange-100'>{blog.category}</span>
                     </div>
-                    <p className='text-gray-500'>{blog.shortDescription}...</p>
+                    <p className='text-gray-500'>{blog.shortDescription.substring(0, 70)}...</p>
                     <div className='flex justify-between items-center mt-4'>
                         <Link to={`/details/${blog._id}`} className='bg-orange-500 text-white px-4 py-1 rounded-md mt-2'>Details</Link>
-                        <button onClick={handleWishList} className="text-red-500 hover:text-red-600 transition-colors text-xl">
+                        <button onClick={() => handleWishList(blog)} className="text-red-500 hover:text-red-600 transition-colors text-xl">
                             ❤️
                         </button>
 

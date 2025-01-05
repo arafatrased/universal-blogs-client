@@ -145,14 +145,14 @@ function NavList() {
             {/* <NavListMenu /> */}
             {
                 user?.email && <Typography
-                as="a"
-                href="#"
-                variant="small"
-                color="blue-gray"
-                className="font-medium"
-            >
-                <NavLink to="/addblog" className={({ isActive }) => isActive ? 'flex text-orange-700 hover:font-semibold items-center gap-2 py-2 pr-4' : 'flex items-center gap-2 py-2 pr-4'}>Add Blog</NavLink>
-            </Typography>
+                    as="a"
+                    href="#"
+                    variant="small"
+                    color="blue-gray"
+                    className="font-medium"
+                >
+                    <NavLink to="/addblog" className={({ isActive }) => isActive ? 'flex text-orange-700 hover:font-semibold items-center gap-2 py-2 pr-4' : 'flex items-center gap-2 py-2 pr-4'}>Add Blog</NavLink>
+                </Typography>
             }
             <Typography
                 as="a"
@@ -172,15 +172,18 @@ function NavList() {
             >
                 <NavLink to="/featured" className={({ isActive }) => isActive ? 'flex text-orange-700 hover:font-semibold items-center gap-2 py-2 pr-4' : 'flex items-center gap-2 py-2 pr-4'}>Featured Blogs</NavLink>
             </Typography>
-            <Typography
-                as="a"
-                href="#"
-                variant="small"
-                color="blue-gray"
-                className="font-medium"
-            >
-                <NavLink to="/wishlist" className={({ isActive }) => isActive ? 'flex text-orange-700 hover:font-semibold items-center gap-2 py-2 pr-4' : 'flex items-center gap-2 py-2 pr-4'}>WishList</NavLink>
-            </Typography>
+            {
+                user?.email && <Typography
+                    as="a"
+                    href="#"
+                    variant="small"
+                    color="blue-gray"
+                    className="font-medium"
+                >
+                    <NavLink to="/wishlist" className={({ isActive }) => isActive ? 'flex text-orange-700 hover:font-semibold items-center gap-2 py-2 pr-4' : 'flex items-center gap-2 py-2 pr-4'}>WishList</NavLink>
+                </Typography>
+            }
+
         </List>
     );
 }

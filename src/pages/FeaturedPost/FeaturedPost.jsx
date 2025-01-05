@@ -56,7 +56,7 @@ const FeaturedPost = () => {
     });
 
     return (
-        <div className="container mx-auto p-4 ">
+        <div className="container mx-auto p-4 min-h-screen">
             <div className='sm:flex-col md:flex-row lg:flex-row justify-between items-center mb-4'>
                 <h1 className="text-2xl text-center font-bold mb-4">Featured <span className='text-orange-700'>Posts</span></h1>
                 <div>

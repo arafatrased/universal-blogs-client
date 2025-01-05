@@ -6,25 +6,40 @@ import {
     Typography,
 } from "@material-tailwind/react";
 
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../provider/AuthProvider';
+import { updateProfile } from 'firebase/auth';
+import auth from '../../firebase/firebase.config';
 
 const Register = () => {
     const { createUserEP } = useContext(AuthContext);
+    const navigate = useNavigate();
 
     const handleRegister = (e) => {
         e.preventDefault();
         const form = e.target;
-        const email= form.email.value;
+        const email = form.email.value;
         const password = form.password.value;
+        const displayName = form.name.value;
+        const photoURL = form.photoURL.value;
         createUserEP(email, password)
-        .then(result =>{
-            const user = result.user;
-            console.log(user);
-        })
-        .catch(error =>{
-            console.log(error);
-        })
+            .then(result => {
+                const user = result.user;
+                updateProfile(auth.currentUser, { displayName: displayName, photoURL: photoURL })
+                    .then(() => {
+                        console.log('Profile ALso Updated');
+                    })
+                    .catch(err => {
+                        console.log('Error', err.message)
+                    })
+                console.log(user);
+                navigate('/');
+            })
+            .catch(error => {
+                console.log(error);
+            })
+
+
 
     }
     return (
@@ -51,6 +66,19 @@ const Register = () => {
                         }}
                     />
                     <Typography variant="h6" color="blue-gray" className="-mb-1">
+                        Your Photo URL
+                    </Typography>
+                    <Input
+                        size="lg"
+                        name="photoURL"
+                        type='text'
+                        placeholder="Photo URL"
+                        className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
+                        labelProps={{
+                            className: "before:content-none after:content-none",
+                        }}
+                    />
+                    <Typography variant="h6" color="blue-gray" className="-mb-1">
                         Your Email
                     </Typography>
                     <Input
@@ -62,6 +90,7 @@ const Register = () => {
                         labelProps={{
                             className: "before:content-none after:content-none",
                         }}
+                        required
                     />
                     <Typography variant="h6" color="blue-gray" className="-mb-1">
                         Password
@@ -71,6 +100,7 @@ const Register = () => {
                         size="lg"
                         name="password"
                         placeholder="********"
+                        required
                         className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
                         labelProps={{
                             className: "before:content-none after:content-none",

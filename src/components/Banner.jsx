@@ -1,35 +1,42 @@
 import { Carousel } from "@material-tailwind/react";
+import axios from "axios";
+import { useEffect, useState } from "react";
+import BanCard from "./BanCard";
+import { Link } from "react-router-dom";
+
 
 export function Banner() {
+  const [bannerData, setBannerData] = useState([]);
+  useEffect(() => {
+    axios.get('http://localhost:5000/blogs/banner')
+      .then(res => {
+        setBannerData(res.data)
+      })
+  }, [])
+
+
   return (
-    <div className="w-full h-[60vh] overflow-hidden">
-      <Carousel className="">
-        <div className="relative">
+    <div className="w-full h-[60vh]">
+      <Carousel className="overflow-hidden">
+        {bannerData.map(bandata => (<div className="relative">
           <img
-            src="https://images.unsplash.com/photo-1497436072909-60f360e1d4b1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2560&q=80"
+            src={bandata.imageUrl}
             alt="image 1"
-            className="w-full object-cover blur-sm"
+            className="w-full "
           />
-          <div>
-            <h1 className="absolute top-1/3 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white text-4xl font-bold">
-              Welcome to Universal Blog
+          <div className="absolute text-center top-1/4 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+            <h1 className="text-orange-600 text-4xl font-bold">
+              {bandata.title}
             </h1>
+            <h2 className="text-white my-2">Category: {bandata.category}</h2>
+            <Link to={`/details/${bandata._id}`} className='bg-orange-500 text-white mt-4 px-4 py-1 rounded-md '>Details</Link>
+
           </div>
         </div>
-        <div>
-          <img
-            src="https://images.unsplash.com/photo-1493246507139-91e8fad9978e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2940&q=80"
-            alt="image 2"
-            className=" w-full object-cover"
-          />
-        </div>
-        <div>
-          <img
-            src="https://images.unsplash.com/photo-1518623489648-a173ef7824f3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2762&q=80"
-            alt="image 3"
-            className=" w-full object-cover"
-          />
-        </div>
+
+        ))}
+
+
       </Carousel>
     </div>
   );
