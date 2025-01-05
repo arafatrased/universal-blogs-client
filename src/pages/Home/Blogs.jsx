@@ -2,6 +2,7 @@ import axios from 'axios';
 import React from 'react';
 import toast from 'react-hot-toast';
 import { Link } from 'react-router-dom';
+import { BsHeart } from "react-icons/bs";
 
 const Blogs = () => {
     const [blogs, setBlogs] = React.useState([]);
@@ -17,7 +18,7 @@ const Blogs = () => {
                     toast.success('Blog added to wishlist!');
                 }
                 else {
-                    toast.error('Failed to add to wishlist');
+                    toast.error('Already added to wishlist');
                 }
             })
             .catch((error) => {
@@ -43,11 +44,11 @@ const Blogs = () => {
                         <span className='text-sm mr-2 text-gray-500 ml-2'>Author: {blog?.author || 'N/A'}</span>
                         <span className='text-sm text-gray-800 rounded-md p-1 bg-orange-100'>{blog.category}</span>
                     </div>
-                    <p className='text-gray-500'>{blog.shortDescription.substring(0, 70)}...</p>
+                    <p className='text-gray-500'>{blog.shortDescription.substring(0, 150)}...</p>
                     <div className='flex justify-between items-center mt-4'>
                         <Link to={`/details/${blog._id}`} className='bg-orange-500 text-white px-4 py-1 rounded-md mt-2'>Details</Link>
                         <button onClick={() => handleWishList(blog)} className="text-red-500 hover:text-red-600 transition-colors text-xl">
-                            ❤️
+                            <BsHeart/>
                         </button>
 
                     </div>

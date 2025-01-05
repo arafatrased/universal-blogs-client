@@ -57,7 +57,7 @@ const AllBlogs = () => {
                 <Button onClick={handleSearch} variant='outlined'>Search</Button>
 
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                 {allblogs.map((blog) => (
                     <div key={blog._id} className='border p-4 rounded-lg shadow-md'>
                         <img src={blog.imageUrl} alt={blog.title} className='w-full h-48 object-cover rounded-md' />
@@ -66,7 +66,7 @@ const AllBlogs = () => {
                             <span className='text-sm mr-2 text-gray-500 ml-2'>Author: {blog?.author || 'N/A'}</span>
                             <span className='text-sm text-gray-800 rounded-md p-1 bg-orange-100'>{blog.category}</span>
                         </div>
-                        <p className='text-gray-500'>{blog.shortDescription.substring(0, 80)}...</p>
+                        <p className='text-gray-500'>{blog.shortDescription.substring(0, 150)}...</p>
                         <div className='flex justify-between items-center mt-4'>
                             <Link to={`/details/${blog._id}`} className='bg-orange-500 text-white px-4 py-1 rounded-md mt-2'>Details</Link>
                             <Link onClick={() => handleWishList(blog)} className="text-red-500 hover:text-red-600 transition-colors text-xl">
