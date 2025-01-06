@@ -1,30 +1,43 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useReactTable, getCoreRowModel, flexRender } from '@tanstack/react-table';
 
 import { Button } from '@material-tailwind/react';
 import { Link, useLoaderData } from 'react-router-dom';
 import axios from 'axios';
 import toast from 'react-hot-toast';
+import useAuth from '../../hooks/useAuth';
 
 
 const WishList = () => {
-  const wishData = useLoaderData();
+  const { user } = useAuth();
 
-  const [wishLists, setWishLists] = React.useState(wishData);
+  const [wishLists, setWishLists] = React.useState([]);
+
+  useEffect(() => {
+    axios.get(`http://localhost:5000/wishlist?email=${user.email}`)
+    .then(res => {
+      setWishLists(res.data);
+    })
+    .catch(err =>{
+      console.log(err)
+    })
+  }, [user.email])
+
+
 
   const handleDelete = (id) => {
     console.log(id);
     axios.delete(`http://localhost:5000/wishlist/${id}`)
-    .then((response) => {
-      console.log(response.data); 
-      if(response.data.deletedCount === 1) {
-        toast.success('Deleted successfully');
-      }
-      const newWishList = wishLists.filter((wish) => wish._id !== id);
-      setWishLists(newWishList);
-    }).catch((error) => {
-      console.error(error);
-    });
+      .then((response) => {
+        console.log(response.data);
+        if (response.data.deletedCount === 1) {
+          toast.success('Deleted successfully');
+        }
+        const newWishList = wishLists.filter((wish) => wish._id !== id);
+        setWishLists(newWishList);
+      }).catch((error) => {
+        console.error(error);
+      });
 
   }
   const columns = [

@@ -59,7 +59,7 @@ const BlogDetails = () => {
             <div className='flex justify-between items-center'>
                 <h1 className="mt-2 text-3xl font-bold text-gray-800">{title}</h1>
                 {
-                    email === user.email && <Link to={`/update/${_id}`}><Button color="red" >Edit</Button></Link>
+                    email === user.email && <Link to={`/update/${_id}`}><Button color="red" >Update</Button></Link>
                 }
             </div>
 

@@ -12,7 +12,7 @@ const Blogs = () => {
     const handleWishList = (blog) => {
         const { _id, title, imageUrl, author, category, shortDescription } = blog;
         console.log(_id);
-        const wishedBlog = { wish_id: _id, title, imageUrl, author, category, shortDescription };
+        const wishedBlog = { wish_id: _id, email: user.email, title, imageUrl, author, category, shortDescription };
         axios.post('http://localhost:5000/wishlist', wishedBlog)
             .then((response) => {
                 console.log(response.data);

@@ -58,7 +58,6 @@ import ErrorPage from "../pages/ErrorPage/ErrorPage";
         {
           path: "wishlist",
           element: <PrivateRoute><WishList></WishList></PrivateRoute>,
-          loader: () => fetch('http://localhost:5000/wishlist')
         },
         {
           path: "featured",

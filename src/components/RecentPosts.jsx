@@ -1,9 +1,11 @@
 import axios from 'axios';
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import useAuth from '../hooks/useAuth';
 
 const RecentPosts = () => {
     const [recents, setRecents] = React.useState([]);
+    const { user } = useAuth();
 
     useEffect(() => {
         axios.get('http://localhost:5000/recent')
@@ -16,7 +18,7 @@ const RecentPosts = () => {
     }, [])
     return (
         <div className='border p-4 rounded-lg shadow-md my-3'>
-            <h1 className='text-xl my-2'>Recent <span className='text-orange-700'>Posts</span></h1>
+            <h1 className='text-xl my-2'>Top <span className='text-orange-700'>Posts</span></h1>
             {
                 recents.map((recent) => (
                     <Link to={`/details/${recent._id}`} key={recent._id}>
