@@ -18,7 +18,7 @@ export function Banner() {
   return (
     <div className="w-full h-[60vh]">
       <Carousel className="overflow-hidden">
-        {bannerData.map(bandata => (<div className="relative">
+        {bannerData.map(bandata => (<div key={bandata._id} className="relative">
           <img
             src={bandata.imageUrl}
             alt="image 1"

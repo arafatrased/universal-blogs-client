@@ -26,8 +26,6 @@ const BlogForm = () => {
         e.preventDefault();
         blogData.email = user.email;
         blogData.author = user.displayName || '';
-        console.log('Form Data:', blogData);
-        console.log('User:', user);
         // Add your submit logic here (e.g., send data to backend)
         axios.post('http://localhost:5000/blogs', blogData)
             .then((response) => {
