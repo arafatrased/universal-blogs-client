@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useReactTable, getCoreRowModel, flexRender } from '@tanstack/react-table';
+import { useReactTable, getCoreRowModel, getSortedRowModel, flexRender } from '@tanstack/react-table';
 import { useLoaderData } from 'react-router-dom';
 
 const FeaturedPost = () => {
@@ -53,6 +53,7 @@ const FeaturedPost = () => {
         data: featuredData,
         columns,
         getCoreRowModel: getCoreRowModel(),
+        getSortedRowModel: getSortedRowModel(),
     });
 
     return (
@@ -85,9 +86,8 @@ const FeaturedPost = () => {
                                         key={header.id}
                                         className="py-2 px-4 border-b text-left text-gray-700"
                                     >
-                                        {header.isPlaceholder
-                                            ? null
-                                            : flexRender(header.column.columnDef.header, header.getContext())}
+                                        {flexRender(header.column.columnDef.header, header.getContext())}
+                                        {header.column.getIsSorted() === 'asc' ? ' 🔼' : header.column.getIsSorted() === 'desc' ? ' 🔽' : ''}
                                     </th>
                                 ))}
                             </tr>

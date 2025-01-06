@@ -4,6 +4,7 @@ import Blogs from './Blogs';
 import Newslater from './Newslater';
 import RecentPosts from '../../components/RecentPosts';
 import { motion } from "motion/react"
+import AddSection from './AddSection';
 
 const Home = () => {
     return (
@@ -24,6 +25,8 @@ const Home = () => {
                 <div className='col-span-1 md:col-span-3'>
                     <Newslater></Newslater>
                     <RecentPosts></RecentPosts>
+                    <AddSection></AddSection>
+
                 </div>
             </div>
         </div>
