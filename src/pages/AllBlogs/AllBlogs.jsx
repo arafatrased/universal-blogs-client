@@ -1,10 +1,12 @@
 import { Button } from '@material-tailwind/react';
 import axios from 'axios';
-import React, { useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 import toast from 'react-hot-toast';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../../provider/AuthProvider';
 
 const AllBlogs = () => {
+    const { user } = useContext(AuthContext);
     const [allblogs, setAllBlogs] = React.useState([]);
     const searchRef = React.useRef(null);
 
@@ -69,10 +71,11 @@ const AllBlogs = () => {
                         <p className='text-gray-500'>{blog.shortDescription.substring(0, 150)}...</p>
                         <div className='flex justify-between items-center mt-4'>
                             <Link to={`/details/${blog._id}`} className='bg-orange-500 text-white px-4 py-1 rounded-md mt-2'>Details</Link>
-                            <Link onClick={() => handleWishList(blog)} className="text-red-500 hover:text-red-600 transition-colors text-xl">
-                                ❤️
-                            </Link>
-
+                            {
+                                user && <Link onClick={() => handleWishList(blog)} className="text-red-500 hover:text-red-600 transition-colors text-xl">
+                                    ❤️
+                                </Link>
+                            }
                         </div>
                     </div>
                 ))}

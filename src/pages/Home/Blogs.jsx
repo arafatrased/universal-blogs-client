@@ -3,10 +3,12 @@ import React from 'react';
 import toast from 'react-hot-toast';
 import { Link } from 'react-router-dom';
 import { BsHeart } from "react-icons/bs";
+import useAuth from '../../hooks/useAuth';
 
 const Blogs = () => {
     const [blogs, setBlogs] = React.useState([]);
-    
+    const { user } = useAuth();
+
     const handleWishList = (blog) => {
         const { _id, title, imageUrl, author, category, shortDescription } = blog;
         console.log(_id);
@@ -47,9 +49,13 @@ const Blogs = () => {
                     <p className='text-gray-500'>{blog.shortDescription.substring(0, 150)}...</p>
                     <div className='flex justify-between items-center mt-4'>
                         <Link to={`/details/${blog._id}`} className='bg-orange-500 text-white px-4 py-1 rounded-md mt-2'>Details</Link>
-                        <button onClick={() => handleWishList(blog)} className="text-red-500 hover:text-red-600 transition-colors text-xl">
-                            <BsHeart/>
-                        </button>
+                        {
+                            user && <button onClick={() => handleWishList(blog)} className="text-red-500 hover:text-red-600 transition-colors text-xl">
+                                <BsHeart />
+                            </button>
+                        }
+
+
 
                     </div>
                 </div>

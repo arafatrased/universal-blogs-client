@@ -2,10 +2,6 @@ import { Typography } from "@material-tailwind/react";
  
 const LINKS = [
   {
-    title: "Product",
-    items: ["Overview", "Features", "Solutions", "Tutorials"],
-  },
-  {
     title: "Company",
     items: ["About us", "Careers", "Press", "News"],
   },
@@ -28,7 +24,7 @@ export function Footer() {
               <h1 className="text-[1rem] pr-8 font-extralight text-justify mt-2">The world is open space for those people who want to share their thoughts for ugrading knowledge to enlight the universal places. So, Share your thought with us and enlight others for sure....</h1>
             </div>
           </Typography>
-          <div className="grid grid-cols-3 justify-between gap-4">
+          <div className="grid grid-cols-2 justify-between gap-4">
             {LINKS.map(({ title, items }) => (
               <ul key={title}>
                 <Typography
