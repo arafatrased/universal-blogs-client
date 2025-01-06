@@ -10,9 +10,10 @@ import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../provider/AuthProvider';
 import { updateProfile } from 'firebase/auth';
 import auth from '../../firebase/firebase.config';
+import toast from 'react-hot-toast';
 
 const Register = () => {
-    const { createUserEP } = useContext(AuthContext);
+    const { createUserEP, logOut } = useContext(AuthContext);
     const navigate = useNavigate();
 
     const handleRegister = (e) => {
@@ -22,21 +23,30 @@ const Register = () => {
         const password = form.password.value;
         const displayName = form.name.value;
         const photoURL = form.photoURL.value;
+        if (!/^.{6,}$/.test(password)) {
+            toast.error("Password must be at least 6 characters long.");
+        }
+        if (!/.*[A-Z].*/.test(password)) {
+            toast.error("Password must contain at least one uppercase letter.");
+        }
+        if (!/.*[!@#$%^&*(),.?":{}|<>].*/.test(password)) {
+            toast.error("Password must contain at least one special character.");
+        }
+        if (!/.*[0-9].*/.test(password)) {
+            toast.error("Password must contain at least one numeric character.");
+        }
         createUserEP(email, password)
             .then(result => {
                 const user = result.user;
                 updateProfile(auth.currentUser, { displayName: displayName, photoURL: photoURL })
                     .then(() => {
-                        console.log('Profile ALso Updated');
+                        toast.success('User Successfully Created');
+                        logOut();
+                        navigate('/login');
                     })
-                    .catch(err => {
-                        console.log('Error', err.message)
-                    })
-                console.log(user);
-                navigate('/');
             })
             .catch(error => {
-                console.log(error);
+                toast.error(error);
             })
 
 

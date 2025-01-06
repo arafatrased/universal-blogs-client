@@ -13,6 +13,7 @@ import AllBlogs from "../pages/AllBlogs/AllBlogs";
 import Table from "../components/Table";
 import FeaturedPost from "../pages/FeaturedPost/FeaturedPost";
 import WishList from "../pages/WishList/WishList";
+import ErrorPage from "../pages/ErrorPage/ErrorPage";
 
 
 
@@ -21,7 +22,7 @@ import WishList from "../pages/WishList/WishList";
     {
       path: "/",
       element: <MainLayout></MainLayout>,
-      errorElement: <h1>404 Not Found</h1>,
+      errorElement: <ErrorPage></ErrorPage>,
       children: [
 
         {

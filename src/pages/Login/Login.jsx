@@ -27,7 +27,7 @@ const Login = () => {
                 console.log(user);
             })
             .catch(error => {
-                console.log(error);
+                toast.error(`${error.message}`);
             })
     }
 
@@ -37,10 +37,10 @@ const Login = () => {
                 const user = result.user;
                 toast.success(`Login Successfull`);
                 navigate(location?.state || '/');
-                console.log(user);
+                
             })
             .catch(error =>{
-                console.log(error);
+                toast.error(`${error.message}`);
             })
             
     }
