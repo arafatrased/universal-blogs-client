@@ -12,7 +12,7 @@ const AllBlogs = () => {
     const searchRef = React.useRef(null);
 
     useEffect(() => {
-        axios.get('http://localhost:5000/allblogs')
+        axios.get('https://universal-blogs-server.vercel.app/allblogs')
             .then(res => {
                 setAllBlogs(res.data)
             })

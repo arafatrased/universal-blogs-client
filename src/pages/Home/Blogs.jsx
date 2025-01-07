@@ -28,7 +28,7 @@ const Blogs = () => {
     }
 
     React.useEffect(() => {
-        fetch('http://localhost:5000/blogs')
+        fetch('https://universal-blogs-server.vercel.app/blogs')
             .then((response) => response.json())
             .then((data) => {
                 setBlogs(data);

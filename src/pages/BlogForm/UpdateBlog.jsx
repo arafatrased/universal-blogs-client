@@ -30,7 +30,7 @@ const UpdateBlog = () => {
         blogData.author = user.displayName || '';
         console.log('Form Data:', blogData);
         // Add your submit logic here (e.g., send data to backend)
-        axios.put(`http://localhost:5000/updateblog/${blog._id}`, blogData)
+        axios.put(`https://universal-blogs-server.vercel.app/updateblog/${blog._id}`, blogData)
             .then((response) => {
                 if(response.data.modifiedCount === 1) {
                     toast.success('Blog Updated Successfully!');

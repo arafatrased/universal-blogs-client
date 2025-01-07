@@ -3,7 +3,7 @@
 ** Short Description **
 The world is open space for those people who want to share their thoughts for ugrading knowledge to enlight the universal places. So, Share your thought with us and enlight others for sure.
 
-# Live Link: 
+# Live Link: https://universal-blogs.web.app/
 
 
 # tailwind css library

@@ -1,9 +1,7 @@
 import React, { useEffect } from 'react';
 import { useReactTable, getCoreRowModel, flexRender } from '@tanstack/react-table';
-
 import { Button } from '@material-tailwind/react';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
 import toast from 'react-hot-toast';
 import useAuth from '../../hooks/useAuth';
 import axiosInstance from '../../axioInstance/axiosInstance';

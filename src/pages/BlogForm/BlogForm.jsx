@@ -27,7 +27,7 @@ const BlogForm = () => {
         blogData.email = user.email;
         blogData.author = user.displayName || '';
         // Add your submit logic here (e.g., send data to backend)
-        axios.post('http://localhost:5000/blogs', blogData)
+        axios.post('https://universal-blogs-server.vercel.app/blogs', blogData)
             .then((response) => {
                 toast.success('Blog Added Successfully')
                 navigate('/allblogs')

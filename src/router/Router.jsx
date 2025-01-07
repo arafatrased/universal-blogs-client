@@ -44,12 +44,12 @@ import ErrorPage from "../pages/ErrorPage/ErrorPage";
         {
           path: 'details/:id',
           element: <PrivateRoute><BlogDetails></BlogDetails></PrivateRoute>,
-          loader: ({params}) => fetch(`http://localhost:5000/blogs/${params.id}`)
+          loader: ({params}) => fetch(`https://universal-blogs-server.vercel.app/blogs/${params.id}`)
         },
         {
           path: 'update/:id',
           element: <PrivateRoute><UpdateBlog></UpdateBlog></PrivateRoute>,
-          loader: ({params}) => fetch(`http://localhost:5000/blogs/${params.id}`)
+          loader: ({params}) => fetch(`https://universal-blogs-server.vercel.app/blogs/${params.id}`)
         },
         {
           path: 'allblogs',
@@ -62,7 +62,7 @@ import ErrorPage from "../pages/ErrorPage/ErrorPage";
         {
           path: "featured",
           element: <FeaturedPost></FeaturedPost>,
-          loader: () => fetch('http://localhost:5000/allblogs')
+          loader: () => fetch('https://universal-blogs-server.vercel.app/allblogs')
         }
       ]
     },
