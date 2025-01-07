@@ -253,7 +253,12 @@ export function NavbarWithMegaMenu() {
                 </div>
                 <Collapse open={openNav}>
                     <NavList />
-                    <div className="flex w-full flex-nowrap items-center gap-2 lg:hidden">
+                    {
+                        user?.email ? <div className="flex items-center justify-center">
+                        <Button className="hover:bg-gray-300" variant="outlined" size="sm" >
+                            <NavLink onClick={logOut} className={({ isActive }) => isActive ? 'flex text-orange-700 hover:font-semibold items-center gap-2' : 'flex items-center gap-2'}>Log Out</NavLink>
+                        </Button>
+                    </div> : <div className="flex w-full flex-nowrap items-center gap-2 lg:hidden">
                         <Button className="hover:bg-gray-300" variant="outlined" size="sm" fullWidth>
                             <NavLink to="/login">Log In</NavLink>
                         </Button>
@@ -261,6 +266,7 @@ export function NavbarWithMegaMenu() {
                             <NavLink to="/register">Register</NavLink>
                         </Button>
                     </div>
+                    }
                 </Collapse>
             </div>
         </div>

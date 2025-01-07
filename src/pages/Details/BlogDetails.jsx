@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
 import { Link, useLoaderData } from 'react-router-dom';
 import useAuth from '../../hooks/useAuth';
-import axios from 'axios';
 import toast from 'react-hot-toast';
 import { Button } from '@material-tailwind/react';
+import axiosInstance from '../../axioInstance/axiosInstance';
 
 const BlogDetails = () => {
     const { user } = useAuth();
@@ -22,7 +22,7 @@ const BlogDetails = () => {
             email: email, blog_id: id, comment: textRef.current.value, displayName: user.displayName,
             photoURL: user.photoURL
         };
-        axios.post('http://localhost:5000/blogs/comments', comment)
+        axiosInstance.post('/blogs/comments', comment)
             .then((response) => {
                 toast.success('Comment Added Successfully');
             })
@@ -34,7 +34,7 @@ const BlogDetails = () => {
 
 
     useEffect(() => {
-        axios.get(`http://localhost:5000/blogs/comments/${_id}`)
+        axiosInstance.get(`/blogs/comments/${_id}`)
             .then((response) => {
                 setComments(response.data);
             })

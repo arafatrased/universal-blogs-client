@@ -4,6 +4,7 @@ import React, { useContext, useEffect } from 'react';
 import toast from 'react-hot-toast';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../provider/AuthProvider';
+import axiosInstance from '../../axioInstance/axiosInstance';
 
 const AllBlogs = () => {
     const { user } = useContext(AuthContext);
@@ -16,12 +17,12 @@ const AllBlogs = () => {
                 setAllBlogs(res.data)
             })
             .catch(err => {
-                console.log(err)
+                toast.error(err)
             })
     }, [])
     const handleSearch = () => {
         const searchValue = searchRef.current.value;
-        axios.get(`http://localhost:5000/allblogs?search=${searchValue}`)
+        axiosInstance.get(`/allblogs?search=${searchValue}`)
             .then(res => {
                 setAllBlogs(res.data)
             })
@@ -31,8 +32,8 @@ const AllBlogs = () => {
     }
     const handleWishList = (blog) => {
         const { _id, title, imageUrl, author, category, shortDescription } = blog;
-        const wishedBlog = { wish_id: _id, title, imageUrl, author, category, shortDescription };
-        axios.post('http://localhost:5000/wishlist', wishedBlog)
+        const wishedBlog = { wish_id: _id, title, email: user?.email, imageUrl, author, category, shortDescription };
+        axiosInstance.post('/wishlist', wishedBlog)
             .then((response) => {
                 if (response.data.insertedId) {
                     toast.success('Blog added to wishlist!');

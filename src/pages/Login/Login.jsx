@@ -24,7 +24,7 @@ const Login = () => {
                 const user = result.user;
                 toast.success(`Login Successfull`);
                 navigate('/');
-                console.log(user);
+                
             })
             .catch(error => {
                 toast.error(`${error.message}`);

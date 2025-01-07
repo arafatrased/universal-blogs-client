@@ -4,6 +4,7 @@ import toast from 'react-hot-toast';
 import { Link } from 'react-router-dom';
 import { BsHeart } from "react-icons/bs";
 import useAuth from '../../hooks/useAuth';
+import axiosInstance from '../../axioInstance/axiosInstance';
 
 const Blogs = () => {
     const [blogs, setBlogs] = React.useState([]);
@@ -12,7 +13,7 @@ const Blogs = () => {
     const handleWishList = (blog) => {
         const { _id, title, imageUrl, author, category, shortDescription } = blog;
         const wishedBlog = { wish_id: _id, email: user.email, title, imageUrl, author, category, shortDescription };
-        axios.post('http://localhost:5000/wishlist', wishedBlog)
+        axiosInstance.post('/wishlist', wishedBlog)
             .then((response) => {
                 if (response.data.insertedId) {
                     toast.success('Blog added to wishlist!');
