@@ -1,14 +1,13 @@
 import { Carousel } from "@material-tailwind/react";
-import axios from "axios";
 import { useEffect, useState } from "react";
-import BanCard from "./BanCard";
 import { Link } from "react-router-dom";
+import axiosInstance from "../axioInstance/axiosInstance";
 
 
 export function Banner() {
   const [bannerData, setBannerData] = useState([]);
   useEffect(() => {
-    axios.get('http://localhost:5000/blogs/banner')
+    axiosInstance.get('/blogs/banner')
       .then(res => {
         setBannerData(res.data)
       })

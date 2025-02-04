@@ -1,14 +1,14 @@
-import axios from 'axios';
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import useAuth from '../hooks/useAuth';
+import axiosInstance from '../axioInstance/axiosInstance';
 
 const RecentPosts = () => {
     const [recents, setRecents] = React.useState([]);
     const { user } = useAuth();
 
     useEffect(() => {
-        axios.get('http://localhost:5000/recent')
+        axiosInstance.get('/recent')
             .then(res => {
                 setRecents(res.data)
             })
